@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Functions</title>
+    </head>
+    
+    <body>
+
+        <script>
+        
+
+
+//Q1- Write A Function identify that takes an argument and returns a function that returns that argument?
+
+function identify(argument){
+    return function(){
+        return argument
+    }
+};
+ 
+ console.log(identify("this is javaScript learning")());
+
+
+
+//Q2- Write three binary functions, add, sub, and mul that take two numbers and return their sum, difference and product.
+  function add(a,b){
+      return a + b;
+  }
+  function sub(a,b){
+      return a - b;
+  }
+  function mul(a,b){
+      return a * b;
+  }
+
+ console.log(add(5,6));
+ console.log(sub(34,6));
+ console.log(mul(5,6));
+
+
+
+
+
+//Q3- Write a function addFunction that adds from two invocations.
+
+function addFunction(x) {
+  return function(y) {
+    return x + y;
+  }
+}
+
+console.log(addFunction(3)(4));
+
+
+//Q.4-  Write a function liftf that takes a binary function, and makes it callable with two invocations.
+
+function liftf(binary){
+    return function(x){
+        return function(y){
+            return binary(x,y);
+        };
+    };
+}
+addf = liftf(add);
+console.log(liftf(add)(6)(4))
+console.log(liftf(mul)(5)(6));
+
+
+
+
+//Q.5-  Write a function curry that takes a binary function and an agrument, and returns a function that can take a second argument.
+
+function curry(binary,n1){
+    return  function(n2){
+       return binary(n1,n2)
+    }
+}
+console.log(curry(mul , 7)(6));
+
+
+
+
+
+
+//Q.6- Without writing any new funcitons, show three ways to create the inc function (adds 1 to a number and returns it)
+ var inc = addFunction(1);
+ console.log(inc(3))
+
+ var inc = curry(add,1);
+ console.log(inc(4));
+
+  var inc = liftf(add)(1);
+  console.log(inc(5));
+
+
+
+
+  
+//Q.7- Write a function twice that takes a binary function and returns a unary function that passes its argument to the binary function twice
+     
+function twice(binary) {
+  return function(x) {
+    return binary(x, x)
+  }
+}
+console.log(twice(mul)(5))
+
+
+
+
+//Q.8-  Write reverse, a function that reverses the arguments of a binary function.
+function reverse(binary){
+    return function(x,y){
+        return binary(y,x)
+    }
+}
+console.log(reverse(mul)(3,9));
+
+
+
+
+
+//Q.9- Write a function composeu that takes two unary functions and returns a unary function that calls them both
+//unary function:
+    //    A unary function is a function that takes one argument, 
+
+function a(x){
+    return x = x * x;
+}
+function b(x){
+    return x = x ** x;
+} 
+
+    function composeu(func1,func2){
+        return function(z){
+       return a(b(z))
+        }
+    }
+    console.log(composeu(a,b)(2))
+   
+    
+                
+
+//Q.10 Write a function composeb that takes two binary functions and returns a function that calls them both?
+function composeb(binary1,binary2){
+    return function(x,y){
+        return binary1(binary2(x,y),y)
+    }
+}
+console.log(composeb(add,mul)(5,6));
+
+  
+  </script>
+ </body>
+    
